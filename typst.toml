@@ -4,15 +4,16 @@
 name = "gat-typst"
 version = "0.1.0"
 entrypoint = "src/lib.typ"
-authors = ["Gatlen Culp"]
+authors = ["Gatlen Culp <GatlenCulp@gmail.com>"]
 license = "MIT"
-description = ""
-homepage = ""
+description = "Gatlen's personal template collection"
+homepage = "https://github.com/GatlenCulp/gat-typst"
 repository = "https://github.com/GatlenCulp/gat-typst"
-keywords = []
-categories = []
-disciplines = []
+keywords = ["Homework"]
+categories = ["utility"]
+disciplines = ["computer-science", "engineering"]
 # compiler = ""
+
 exclude = [
   ".github",
   "docs",
@@ -24,10 +25,10 @@ exclude = [
   "thumbnail-light.svg",
 ]
 
-# [template]
-# path = "template"
-# entrypoint = "main.typ"
-# thumbnail = "thumbnail.png"
+[template]
+path = "template"
+entrypoint = "hw01.typ"
+thumbnail = "thumbnail.png"
 
 # [tool.mytool]
 # foo = "bar"
