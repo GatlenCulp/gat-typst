@@ -3,7 +3,90 @@
 #show: homework.with(
   // title: "HW02",
   // date: datetime(year: 2025, month: 9, day: 22),
+  cols: 2,
 )
+#let solution = solution.with(cols: 2)
+#solution[
+
+  $
+    grad_theta V_mu (pi_theta)
+    = EE_(tau ~ P) [
+      R(tau)
+      sum_(t=0)^oo
+      grad_theta log pi_theta (a_t | s_t)
+    ]
+    \
+    = EE_(tau ~ P) [
+      (sum_(t=0)^oo gamma^t r(s_t, a_t))
+      (sum_(t'=0)^oo grad_theta log pi_theta (a_(t') | s_(t')))
+    ]
+    \
+    = EE_(tau ~ P) [
+      sum_(t=0)^oo sum_(t'=0)^oo
+      gamma^t r(s_t, a_t)
+      grad_theta log pi_theta (a_(t') | s_(t'))
+    ]
+    \
+    = EE_(tau ~ P) [
+      sum_(t'=0)^oo
+      grad_theta log pi_theta (a_(t') | s_(t'))
+      sum_(t=0)^oo
+      gamma^t r(s_t, a_t)
+    ]
+    \
+    = EE_(tau ~ P) [
+      sum_(t'=0)^oo
+      grad_theta log pi_theta (a_(t') | s_(t'))
+      (
+        sum_(t=0)^(t'-1)
+        gamma^t r(s_t, a_t)
+        + sum_(t=t')^(oo)
+        gamma^t r(s_t, a_t)
+      )
+    ]
+  $
+  - List test
+  - List test
+  - List test
+    - List test
+  #lorem(500)
+
+
+  #link("https://colab.research.google.com/drive/11VOd7wX0xWXFR4uUfNZWP8fDIygM-QmR?usp=sharing")
+]
+
+// #set text(size: 13pt)
+
+$a * b * c^* @ v ~~ u o. v * Pr(X) * Var(Y) .. "test"$
+= Other packages of interest:
+
+== Scribe (High likelihood)
+Uses (mostly) ascii math to simplify the look of operators
+
+With scribe you can write
+`$Ff * (f @ g)(x) \\ {0} -= +-1 .. (mod n)$`
+
+instead of
+`$cal(F) dot.op (f compose g)(x) without {0} equiv plus.minus 1 quad (mod n)$`
+
+== Math Shorthands
+
+Interesting process of looking for and replacing elements inside of your body. Could probably steal from this. See:
+https://github.com/EpicEricEE/typst-quick-maths/blob/master/src/quick-maths.typ#L46
+
+== Eqalc: Convert Math equations to functions
+https://typst.app/universe/package/eqalc
+
+Along a similar vein, numty (like numpy):
+https://typst.app/universe/package/numty
+
+Fitch-style proofs?? Prob not but interesting.
+https://typst.app/universe/package/derive-it
+
+== Prismath
+
+Seems cool but also doesn't seem to work well lol. May need to add with `show` to be better.
+https://typst.app/universe/package/prismath
 
 // #let dracula-theme = read("../Dracula.tmTheme")
 // #set raw(theme: "../Dracula.tmTheme")
@@ -58,6 +141,10 @@ For macros:
 #let P = $ mark(P, color: #red) $
 
 $#P$
+
+$Ex_X [X^2]$
+
+
 
 #pagebreak()
 = My Macros

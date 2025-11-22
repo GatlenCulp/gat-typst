@@ -24,19 +24,22 @@
     flake-utils,
     ...
   }:
+    # nixpkgs.font-awesome;
     flake-utils.lib.eachDefaultSystem (system: let
-      # pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = nixpkgs.legacyPackages.${system};
       # inherit (pkgs) lib;
 
       typixLib = typix.lib.${system};
 
+      # Think I need to change this to get a different root.
       src = typixLib.cleanTypstSource ./.;
       commonArgs = {
-        typstSource = "main.typ";
+        typstSource = "template/hw01.typ";
 
         fontPaths = [
           # Add paths to fonts here
           # "${pkgs.roboto}/share/fonts/truetype"
+          "${pkgs.font-awesome}/share/fonts/opentype"
         ];
 
         virtualPaths = [
@@ -46,6 +49,9 @@
           #   src = "${inputs.font-awesome}/svgs/regular";
           # }
         ];
+        typstOpts = {
+          root = ./.;
+        };
       };
 
       # Compile a Typst project, *without* copying the result

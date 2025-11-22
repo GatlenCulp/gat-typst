@@ -11,6 +11,9 @@
 
 #set heading(numbering: "1.1")
 
+#notes[
+  test
+]
 
 = Actor-Critic Methods
 
