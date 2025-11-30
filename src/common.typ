@@ -25,11 +25,14 @@
 #import "@preview/splash:0.5.0": xcolor
 #import "@preview/typpuccino:0.1.0": frappe, latte, macchiato, mocha
 
+#import "@preview/booktabs:0.0.4": *
 
 // Date formatter
 #let date-format = date => if type(date) == type(datetime.today()) {
   date.display("[weekday], [year] [month repr:short] [day]")
 } else { date }
+
+
 
 
 #let common(enable-shorthands: true, body) = {
@@ -68,10 +71,10 @@
   // Code
   show: codly-init.with()
   codly(languages: codly-languages, stroke: 1pt + black, zebra-fill: gray.lighten(80%))
-  show raw: it => {
-    set text(size: 8pt)
-    it
-  }
+  show raw: set text(font: gat-fonts.at("code").at("default"), ligatures: false, size: 8pt)
+
+  // Tables
+  show: booktabs-default-table-style
 
   // Math
   show: equate.with(breakable: true, sub-numbering: false)

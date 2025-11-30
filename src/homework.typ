@@ -13,7 +13,12 @@
   } else {
     black
   }
-  gatbox(color: color, breakable: true, ..args)
+  gatbox(
+    color: color,
+    breakable: true,
+    // body-inset: (x: 30pt, y: 10pt),
+    ..args,
+  )
 }
 #let solution(cols: 1, body) = [
   #columns(cols)[

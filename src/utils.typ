@@ -23,6 +23,8 @@
 #let SE = $"SE"$
 #let ddot = sym.dot.double
 #let alias = $<-^"alias"$
+#let clamp(x) = $"clamp"{#x}$
+#let solve(x) = $"solve"{#x}$
 
 // ------ MISC UTILS --------
 #let llm = text.with(fill: green.darken(30%))
@@ -163,3 +165,26 @@
 #let Corr = stats-func("Corr")
 #let Ex = stats-func($EE$, attach-style: math.limits)
 #let Pr = stats-func("Pr")
+
+
+
+#let scr(it) = text(
+  stylistic-set: 1,
+  $cal(it)$,
+)
+
+#let gat-fonts = (
+  "code": ("default": "FiraCode Nerd Font Mono"),
+  "math": (
+    "default": "New Computer Modern Math",
+    "sans": "Fira Math",
+    "light": "GFS Neohellenic Math",
+  ),
+)
+
+
+#let math-typing-font = gat-fonts.at("math").at("sans")
+#let RV(x) = text(
+  font: math-typing-font,
+  $#x$,
+)

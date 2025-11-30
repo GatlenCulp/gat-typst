@@ -1,25 +1,21 @@
 # The `my-package` Package
 <div align="center">Version 0.1.0</div>
 
-A short description about the project and/or client.
+<!-- TODO: A short description about the project and/or client. -->
 
-<!-- https://typst-community.github.io/tytanic/index.html -->
+<!-- TODO: Test cases https://typst-community.github.io/tytanic/index.html -->
 
-## Template adaptation checklist
-
-- [ ] remove/replace the example test case
-- [ ] (add your actual code, docs and tests)
-- [ ] remove this section from the README
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on the typst web app. Perhaps a short code example on importing the package and a very simple teaser usage.
 
 ```typ
-#import "@preview/my-package:0.1.0": *
+#import "@local/gat-typst:0.1.0": *
 
-#show: my-show-rule.with()
-#my-func()
+#show: homework.with()
+
+$ Ex(A | B) $
 ```
 
 <picture>
@@ -29,13 +25,15 @@ These instructions will get you a copy of the project up and running on the typs
 
 ### Installation
 
+<!-- TODO: Installation -->
+<!-- 
 A step by step guide that will tell you how to get the development environment up and running. This should explain how to clone the repo and where to (maybe a link to the typst documentation on it), along with any pre-requisite software and installation steps.
 
 ```
 $ First step
 $ Another step
 $ Final step
-```
+``` -->
 
 ## Usage
 
@@ -46,10 +44,3 @@ A more in-depth description of usage. Any template arguments? A complicated exam
 
 #let my-complicated-example = ...
 ```
-
-## Additional Documentation and Acknowledgments
-
-* Project folder on server:
-* Confluence link:
-* Asana board:
-* etc...
