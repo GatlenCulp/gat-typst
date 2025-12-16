@@ -12,7 +12,6 @@ repository = "https://github.com/GatlenCulp/gat-typst"
 keywords = ["Homework"]
 categories = ["utility"]
 disciplines = ["computer-science", "engineering"]
-# compiler = ""
 
 exclude = [
   ".github",
@@ -29,6 +28,3 @@ exclude = [
 path = "template"
 entrypoint = "hw01.typ"
 thumbnail = "thumbnail.png"
-
-# [tool.mytool]
-# foo = "bar"
