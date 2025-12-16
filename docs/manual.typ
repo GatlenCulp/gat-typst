@@ -424,6 +424,8 @@ Create your own math functions with custom delimiters:
 
 Customizable colored boxes with automatic color cycling.
 
+> *Tip:* Combine with FontAwesome icons (via `#fa-icon()`, requires `#show: style.with()`) for visually distinct boxes.
+
 ==== Basic Usage
 
 #columns(2)[
@@ -479,21 +481,21 @@ Automatically cycle through predefined colors:
 
 #columns(2)[
   ```typ
-  #gatbox(title: "Important", color: red)[
+  #gatbox(title: [#fa-icon("triangle-exclamation") Important], color: red)[
     This is a critical point!
   ]
 
-  #gatbox(color-cycle: true, title: "Theorem 1")[
+  #gatbox(color-cycle: true, title: [#fa-icon("book") Theorem 1])[
     All horses are the same color.
   ]
   ```
   #colbreak()
 
-  #gatbox(title: "Important", color: red)[
+  #gatbox(title: [#fa-icon("triangle-exclamation") Important], color: red)[
     This is a critical point!
   ]
 
-  #gatbox(color-cycle: true, title: "Theorem 1")[
+  #gatbox(color-cycle: true, title: [#fa-icon("book") Theorem 1])[
     All horses are the same color.
   ]
 ]
@@ -1451,13 +1453,13 @@ Use for: Consistent color theming.
 
 = Matrix Operations
 
-#gatbox(title: [Transpose])[
+#gatbox(title: [#fa-icon("arrows-rotate") Transpose])[
   $(A^T)_(i j) = A_(j i)$
 
   $(A B)^T = B^T A^T$
 ]
 
-#gatbox(title: [Determinant])[
+#gatbox(title: [#fa-icon("calculator") Determinant])[
   $det(A B) = det(A) * det(B)$
 
   $det(A^T) = det(A)$
@@ -1467,13 +1469,13 @@ Use for: Consistent color theming.
 
 = Eigenvalues
 
-#gatbox(title: [Definition])[
+#gatbox(title: [#fa-icon("compass") Definition])[
   $A vb(v) = lambda vb(v)$
 
   $det(A - lambda I) = 0$
 ]
 
-#gatbox(title: [Properties])[
+#gatbox(title: [#fa-icon("list-check") Properties])[
   $product_(i=1)^n lambda_i = det(A)$
 
   $sum_(i=1)^n lambda_i = "tr"(A)$
@@ -1481,7 +1483,7 @@ Use for: Consistent color theming.
 
 = Vector Spaces
 
-#gatbox(title: [Subspaces])[
+#gatbox(title: [#fa-icon("cube") Subspaces])[
   *Null space:* $cal(N)(A) = Set(vb(x), A vb(x) = vb(0))$
 
   *Column space:* $cal(C)(A) = Set(A vb(x), vb(x) in RR^n)$
@@ -1489,7 +1491,7 @@ Use for: Consistent color theming.
   *Row space:* $cal(C)(A^T)$
 ]
 
-#gatbox(title: [Fundamental Theorem])[
+#gatbox(title: [#fa-icon("book") Fundamental Theorem])[
   $dim cal(C)(A) + dim cal(N)(A) = n$
 
   $cal(C)(A)^perp = cal(N)(A^T)$

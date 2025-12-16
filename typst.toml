@@ -26,5 +26,5 @@ exclude = [
 
 [template]
 path = "template"
-entrypoint = "hw01.typ"
+entrypoint = "cheatsheet/cheatsheet.typ"
 thumbnail = "thumbnail.png"
