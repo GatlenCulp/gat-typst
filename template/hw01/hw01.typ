@@ -1,12 +1,15 @@
-#import "preamble.typ": *
+#import "../preamble.typ": *
+#import "@preview/callisto:0.2.4"
 
 #show: homework.with(
   title: "HW01",
   date: datetime(year: 2025, month: 10, day: 27),
 )
 
+#show: style.with()
+
 #let (render, Cell, In, Out) = callisto.config(
-  nb: json("demo.ipynb"),
+  nb: json("hw01.ipynb"),
 )
 
 #set heading(numbering: "1.1")
@@ -319,7 +322,6 @@
     Q (s, a) grad log pi (a | s)
     dd(a)
     dd(s)
-    // PLEASE EXPLAIN THIS JUMP
     \
     =
     sum_(t=0)^oo gamma^t
@@ -633,8 +635,6 @@
 
 // Use semigradient, i.e. when calculating the gradient, treat y_t as a constant
 
-
-
 #question(status: "todo")[
   In the following, we parametrize the policy Q-function $Q_theta$ by parameter $theta$, and we denote the Boltzman policy $pi_(Q_theta)^B$ by $pi_theta$, and its value function $V_(pi_(Q_theta)^B)$ as $V_theta$. We let
   $
@@ -836,8 +836,6 @@
 #pagebreak()
 == Part 4: Relationship between soft Q-learning and policy gradient
 
-// Is the delta_t inside or outside the gradient in the first term on the right hand side? I believe it is inside
-
 #question(status: "todo")[
   If we assume that the samples $s_t, a_t, r_t$ are all collected according to policy $pi$, show the following relationship between the gradient of soft Q-learning and the policy gradient.
   // https://piazza.com/class/mey9hjom2td4p3/post/235 first term of expectation should have grad_theta log not just grad_theta
@@ -882,21 +880,6 @@
     - Episode length is greater than $500$.
 
   Please read the detailed instructions in the Colab link (can be found here). Complete the code, do the experiments, and answer the questions in the notebook. For submission, please include all your results in the pdf submitted to Gradescope, as well as a link with your used code.
-]
-// To confirm my understanding of task (d), should I train the linear model using REINFORCE with temporal structure and baseline, and also train the non-linear model using REINFORCE with temporal structure and baseline, and then compare them based on the number of parameters and their policy performance (i.e., their learning curves)? hw7 Yes, you can just train the new model on a linear policy and compare it to the results from part (b).
-
-
-// What is the average rewards we should get in 4-a/b. I am not sure if my algorithm is correct. Can we get a baseline?
-// I got 100-300 for vanilla (probably due to randomization in the training) and 500 consistently for temporal and baseline+temporal.
-
-
-#solution[
-  #link(
-    "https://colab.research.google.com/drive/1aYiajNFYrMbDbco8kGTqnoQjtjdDAjro?usp=sharing",
-  )[Link to code: https://colab.research.google.com/drive/1aYiajNFYrMbDbco8kGTqnoQjtjdDAjro?usp=sharing
-  ]
-
-  In case there are complications, I used Callisto to display the notebook in the PDF below.
 ]
 
 #pagebreak()

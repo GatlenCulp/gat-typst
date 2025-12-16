@@ -1,10 +1,32 @@
-#import "preamble.typ": *
+#import "../preamble.typ": *
+
+// Diagramming
+#import "@preview/cetz:0.4.2": canvas, draw
+#import "@preview/cetz-plot:0.1.2": plot
+#import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
+#import "@preview/lilaq:0.5.0" as lq
+// Math
+#import "@preview/matset:0.1.0"
+// Compatibility
+#import "@preview/mitex:0.2.5": mitex, mitex-convert, mitext
+// Display
+#import "@preview/frame-it:1.2.0": *
+// Code
+#import "@preview/callisto:0.2.4"
+#import "@preview/lovelace:0.3.0": pseudocode-list
+#import "@preview/cmarker:0.1.6"
+// Color
+#import "@preview/splash:0.5.0": xcolor
+#import "@preview/typpuccino:0.1.0": frappe, latte, macchiato, mocha
+
 
 #show: homework.with(
   // title: "HW02",
   // date: datetime(year: 2025, month: 9, day: 22),
   cols: 2,
 )
+#show: style.with()
+
 #let solution = solution.with(cols: 2)
 #solution[
 

@@ -1,4 +1,4 @@
-
+// WIP (but also maybe never)
 // ------ COLOR UTILS -------
 
 // #let color-cycle-factory(count, colors: (blue, red, green, orange, purple)) = {

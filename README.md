@@ -5,6 +5,8 @@
 
 <!-- TODO: Test cases https://typst-community.github.io/tytanic/index.html -->
 
+Note: There will be some slight performance issues. I import too many packages oops.
+
 
 ## Getting Started
 

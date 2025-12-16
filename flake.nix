@@ -1,5 +1,5 @@
 {
-  description = "Gat-typst template";
+  description = "Gat-typst template (WIP, DO NOT USE)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";

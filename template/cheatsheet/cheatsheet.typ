@@ -1,10 +1,12 @@
-#import "preamble.typ": *
+#import "../preamble.typ": *
 
 
 #show: cheatsheet.with(
   title: "Midterm",
   date: datetime(year: 2025, month: 11, day: 2),
 )
+
+#show: style.with()
 
 #let gatbox = gatbox.with(color-cycle: true)
 

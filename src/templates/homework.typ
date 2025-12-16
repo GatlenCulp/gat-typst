@@ -1,7 +1,13 @@
-#import "common.typ": *
+#import "../utils/utils.typ": *
 #import "@preview/hydra:0.6.2": hydra
 
 // Much taken from IEEE-charged template
+
+// Date formatter
+#let date-format = date => if type(date) == type(datetime.today()) {
+  date.display("[weekday], [year] [month repr:short] [day]")
+} else { date }
+
 
 #let question(..args, status: "none") = {
   let color = if status == "done" {
@@ -136,10 +142,6 @@
 
   // Paragraph Settings
   set par(justify: true, first-line-indent: (amount: 1em, all: true), spacing: 0.5em, leading: 0.5em)
-
-
-  // Common Settings
-  show: common.with()
 
   // Header
   if show-header {

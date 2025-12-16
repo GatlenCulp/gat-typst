@@ -1,4 +1,9 @@
-#import "common.typ": *
+
+// Date formatter
+#let date-format = date => if type(date) == type(datetime.today()) {
+  date.display("[weekday], [year] [month repr:short] [day]")
+} else { date }
+
 
 #let cheatsheet(
   title: "Cheatsheet",
@@ -30,7 +35,6 @@
     it
   }
 
-  show: common.with()
   heading(level: 1, numbering: none)[#course #title]
   align(center)[#author · #date-format(date)]
   body
