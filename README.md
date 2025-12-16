@@ -6,6 +6,12 @@ A personal Typst template collection for academic writing, featuring homework an
 
 > **Note:** This is a personal library for Gatlen Culp's usage and is unstable. Feel free to use it, but expect breaking changes.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./thumbnail-dark.svg">
+  <img src="./thumbnail-light.svg">
+</picture>
+
+
 ## Features
 
 - **Templates**: Professional homework and cheatsheet layouts
