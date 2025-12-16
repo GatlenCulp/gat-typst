@@ -7,9 +7,7 @@
 
 // TODO: Check out actual manual packages for better documenting code. Oh and actuall document code.
 
-#show: common.with()
-
-
+#show: style.with()
 
 #align(center)[
   #text(size: 24pt, weight: "bold")[gat-typst Package Manual]
@@ -37,11 +35,11 @@ This is a growing library for Gatlen Culp's personal usage and is unstable.
 
 == Key Features
 
-- *Templates*: Ready-to-use templates for homework, cheatsheets, and general documents
+- *Templates*: Ready-to-use templates for homework and cheatsheets
 - *Math Utilities*: Enhanced math notation with semantic symbols and custom functions
-- *Integrated Packages*: 20+ carefully selected packages for diagrams, code, and formatting
-- *Opinionated Styling*: Professional defaults for code, tables, and equations
+- *Optional Styling*: Professional defaults for code, tables, equations, and math shorthands (opt-in via `style`)
 - *Convenience Functions*: Colored boxes, custom math operators, and more
+- *Integrated Packages*: Core packages for math, code, and formatting
 
 == Installation
 
@@ -77,6 +75,9 @@ Here's a minimal homework document to get started:
   date: datetime.today(),
 )
 
+// Optional: Enable enhanced styling (math shorthands, code styling, etc.)
+#show: style.with()
+
 #question(status: "done")[
   Prove that $P = N P$.
 ]
@@ -92,11 +93,11 @@ Here's a minimal homework document to get started:
 #pagebreak()
 = Important Behavior Changes
 
-When using this package, several default behaviors are modified for improved mathematical typesetting and consistency.
+When using the `style` function, several default behaviors are modified for improved mathematical typesetting and consistency. *These changes are opt-in* - you must explicitly use `#show: style.with()` to enable them.
 
 == Math Shorthands
 
-The package enables extensive math operator shorthands via the `quick-maths` package. These are *automatically active* in all templates.
+The `style` function enables extensive math operator shorthands via the `quick-maths` package.
 
 === Complete Shorthand List
 
@@ -197,13 +198,19 @@ This follows conventions in linear algebra and physics but may surprise users ex
 
 === Disabling Shorthands
 
-If you need to disable shorthands:
+Shorthands are disabled by default. To enable them, use:
 
 ```typ
-#show: common.with(enable-shorthands: false)
+#show: style.with()
 ```
 
-Note: Currently this parameter exists but shorthands are applied regardless. This will be fixed in a future version.
+If you want to use `style` without shorthands, you can disable them:
+
+```typ
+#show: style.with(enable-shorthands: false)
+```
+
+Note: Currently this parameter exists but shorthands are applied regardless when `style` is used. This will be fixed in a future version.
 
 === Examples
 
@@ -540,11 +547,13 @@ The package includes custom show rules that can be used independently:
 ]
 
 #pagebreak()
-= Common Styling
+= Style Function
+
+The `style` function provides enhanced styling for code, tables, and math notation. This is *opt-in* and must be explicitly enabled with `#show: style.with()`.
 
 == Code Styling
 
-All code blocks are automatically styled:
+When using `style`, all code blocks are automatically styled:
 
 === Automatic Changes
 
@@ -570,7 +579,7 @@ No manual configuration needed - just use standard Typst raw blocks with languag
 
 == Table Styling
 
-The `booktabs` package is automatically applied, giving all tables professional styling with:
+When using `style`, the `booktabs` package is automatically applied, giving all tables professional styling with:
 
 - Proper spacing between rows
 - Professional horizontal rules (top, mid, bottom)
@@ -587,22 +596,30 @@ The `booktabs` package is automatically applied, giving all tables professional 
 )
 ```
 
+#table(
+  columns: 3,
+  [*Algorithm*], [*Time*], [*Space*],
+  [Quicksort], [$O(n log n)$], [$O(log n)$],
+  [Mergesort], [$O(n log n)$], [$O(n)$],
+  [Heapsort], [$O(n log n)$], [$O(1)$],
+)
+
 No special syntax required - standard `#table()` gets enhanced styling.
 
 #pagebreak()
 
 = Templates
 
-The package provides three main templates: `common`, `homework`, and `cheatsheet`. All templates are designed to work together and share common styling.
+The package provides two main templates: `homework` and `cheatsheet`. Both templates can be enhanced with the optional `style` function for additional styling features.
 
-== Common Template
+== Style Function
 
-The `common` template is the foundation that provides imports, styling, and configuration. It's automatically applied by both `homework` and `cheatsheet` templates, but can also be used standalone.
+The `style` function provides enhanced styling for code, tables, equations, and math notation. It is *optional* and must be explicitly enabled.
 
 === Usage
 
 ```typ
-#show: common.with()
+#show: style.with()
 ```
 
 === Parameters
@@ -611,7 +628,7 @@ The `common` template is the foundation that provides imports, styling, and conf
 
 === Features Provided
 
-The `common` template automatically configures:
+The `style` function automatically configures:
 
 1. *FontAwesome Icons*: Access to icon library via `fa-icon()` function
 2. *Code Styling*: Syntax highlighting with Codly, 8pt font size, zebra striping
@@ -628,9 +645,9 @@ The `common` template automatically configures:
 === Example
 
 ```typ
-#import "@local/gat-typst:0.1.0": *
+#import "@preview/gat-typst:0.1.0": *
 
-#show: common.with()
+#show: style.with()
 
 // Use FontAwesome icons
 #fa-icon("heart") Math is beautiful
@@ -638,7 +655,7 @@ The `common` template automatically configures:
 // Code with automatic styling
 ```python
 def hello():
-print("Hello, world!")
+    print("Hello, world!")
 ```
 
 // Professional tables
@@ -652,6 +669,26 @@ print("Hello, world!")
 // Math with special superscripts
 $ A^T dot B^+ = C^* $
 ```
+
+// Use FontAwesome icons
+#fa-icon("heart") Math is beautiful
+
+// Code with automatic styling
+```python
+def hello():
+    print("Hello, world!")
+```
+
+// Professional tables
+#table(
+  columns: 3,
+  [*Name*], [*Age*], [*City*],
+  [Alice], [25], [Boston],
+  [Bob], [30], [Seattle],
+)
+
+// Math with special superscripts
+$ A^T dot B^+ = C^* $
 
 #pagebreak()
 == Homework Template
@@ -859,49 +896,60 @@ $ integral x^n dd(x) = x^(n+1)/(n+1) + C $
 #pagebreak()
 = Dependencies & Imports
 
-The package integrates 20+ external packages, organized by category.
+The package integrates carefully selected external packages. The `style` function automatically imports core packages for math, code, and formatting.
 
 == Overview
 
-All imports from `src/common.typ`:
+Active imports from `src/style/style.typ` (when using `#show: style.with()`):
 
 ```typ
-// === Diagramming ===
-#import "@preview/cetz:0.4.2": canvas, draw
-#import "@preview/cetz-plot:0.1.2": plot
-#import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
-#import "@preview/lilaq:0.5.0" as lq
-
 // === Math ===
-#import "@preview/matset:0.1.0"
 #import "@preview/equate:0.3.2": equate
-#import "@preview/physica:0.9.5": *
+#import "@preview/physica:0.9.6": *
 #import "@preview/quick-maths:0.2.1": shorthands
-#import "@preview/mannot:0.3.0": *
 
 // === Code ===
-#import "@preview/callisto:0.2.4"
-#import "@preview/lovelace:0.3.0": pseudocode-list
 #import "@preview/codly:1.3.0": *
 #import "@preview/codly-languages:0.1.1": codly-languages
-#import "@preview/cmarker:0.1.6"
 
 // === Display & Formatting ===
-#import "@preview/frame-it:1.2.0": *
 #import "@preview/fontawesome:0.6.0": *
-#import "@preview/showybox:2.0.4": showybox
-#import "@preview/hydra:0.6.2": hydra
 #import "@preview/booktabs:0.0.4": *
 
-// === Compatibility ===
-#import "@preview/mitex:0.2.5": mitex, mitex-convert, mitext
+// === Utilities ===
+// Available through gat-typst but not auto-imported by style:
+// #import "@preview/showybox:2.0.4": showybox
+// #import "@preview/hydra:0.6.2": hydra
 
-// === Color ===
-#import "@preview/splash:0.5.0": xcolor
-#import "@preview/typpuccino:0.1.0": frappe, latte, macchiato, mocha
+// === Diagramming === (not included in style, must import separately)
+// #import "@preview/cetz:0.4.2": canvas, draw
+// #import "@preview/cetz-plot:0.1.2": plot
+// #import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node
+// #import "@preview/lilaq:0.5.0" as lq
+
+// === Additional Math === (not included in style)
+// #import "@preview/matset:0.1.0"
+// #import "@preview/mannot:0.3.0": *
+
+// === Additional Code === (not included in style)
+// #import "@preview/callisto:0.2.4"
+// #import "@preview/lovelace:0.3.0": pseudocode-list
+// #import "@preview/cmarker:0.1.6"
+
+// === Additional Display === (not included in style)
+// #import "@preview/frame-it:1.2.0": *
+
+// === Compatibility === (not included in style)
+// #import "@preview/mitex:0.2.5": mitex, mitex-convert, mitext
+
+// === Color === (not included in style)
+// #import "@preview/splash:0.5.0": xcolor
+// #import "@preview/typpuccino:0.1.0": frappe, latte, macchiato, mocha
 ```
 
 == Diagramming
+
+*Note: Diagramming packages are not included in `style`. Import them explicitly if needed.*
 
 === CeTZ (v0.4.2)
 
@@ -972,13 +1020,19 @@ Use for: Scientific plots, cleaner syntax than CeTZ Plot.
 
 == Math
 
+*Note: Equate, Physica, and Quick-maths are automatically imported by `style`. Other math packages must be imported explicitly.*
+
 === Matset (v0.1.0)
+
+*Not included in `style` - import explicitly if needed.*
 
 Set notation support.
 
 Use for: Mathematical set operations and notation.
 
 === Equate (v0.3.2)
+
+*Included in `style` - automatically available.*
 
 Advanced equation numbering with breakable equations.
 
@@ -999,9 +1053,11 @@ Advanced equation numbering with breakable equations.
   // Reference: @eq:quadratic-example
 ]
 
-Use for: Equation numbering and cross-referencing. Automatically enabled.
+Use for: Equation numbering and cross-referencing.
 
-=== Physica (v0.9.5)
+=== Physica (v0.9.6)
+
+*Included in `style` - automatically available.*
 
 Comprehensive physics notation package.
 
@@ -1062,11 +1118,15 @@ Use for: Almost all physics and advanced math notation.
 
 === Quick-maths (v0.2.1)
 
+*Included in `style` - automatically available.*
+
 Math shorthand system (powers the operator replacements).
 
-Automatically enabled via `common` template. See section 5 for details.
+See "Important Behavior Changes" section for details.
 
 === Mannot (v0.3.0)
+
+*Not included in `style` - import explicitly if needed.*
 
 Math annotations and labels.
 
@@ -1091,7 +1151,11 @@ Use for: Annotating complex equations, teaching materials.
 
 == Code
 
+*Note: Codly and Codly Languages are automatically imported by `style`. Other code packages must be imported explicitly.*
+
 === Callisto (v0.2.4)
+
+*Not included in `style` - import explicitly if needed.*
 
 Jupyter notebook rendering.
 
@@ -1109,6 +1173,8 @@ Use for: Including Jupyter notebook code/output in documents.
 
 === Lovelace (v0.3.0)
 
+*Not included in `style` - import explicitly if needed.*
+
 Pseudocode formatting.
 
 ```typ
@@ -1124,9 +1190,11 @@ Use for: Algorithm descriptions.
 
 === Codly (v1.3.0) + Codly Languages (v0.1.1)
 
+*Included in `style` - automatically available.*
+
 Modern syntax highlighting for code blocks.
 
-Automatically configured with:
+When using `style`, automatically configured with:
 - 8pt font size
 - 1pt black stroke
 - Zebra striping (gray.lighten(80%))
@@ -1144,13 +1212,19 @@ Use for: All code snippets. Automatically applied to raw blocks.
 
 === Cmarker (v0.1.6)
 
+*Not included in `style` - import explicitly if needed.*
+
 CommonMark (Markdown) support.
 
 Use for: Converting Markdown to Typst.
 
 == Display & Formatting
 
+*Note: FontAwesome and Booktabs are automatically imported by `style`. Other display packages must be imported explicitly.*
+
 === Frame-it (v1.2.0)
+
+*Not included in `style` - import explicitly if needed.*
 
 Custom frame styles for content boxes.
 
@@ -1169,6 +1243,8 @@ Use for: Theorem environments, examples, definitions.
 
 === FontAwesome (v0.6.0)
 
+*Included in `style` - automatically available.*
+
 Font Awesome icon support (version 6).
 
 ```typ
@@ -1181,7 +1257,9 @@ Use for: Visual indicators, status icons. Note: Requires Font Awesome fonts inst
 
 === Showybox (v2.0.4)
 
-Styled, breakable boxes (base for `gatbox`).
+*Available through gat-typst utilities (base for `gatbox`).*
+
+Styled, breakable boxes.
 
 ```typ
 #showybox(
@@ -1197,27 +1275,37 @@ Use for: Custom boxes, callouts, highlighted content.
 
 === Hydra (v0.6.2)
 
+*Available through gat-typst but not included in `style`.*
+
 Context-aware page headers showing current section.
 
 ```typ
+#import "@preview/hydra:0.6.2": hydra
+
 #set page(header: context [
   #text(fill: gray)[*#hydra(2)*]
 ])
 ```
 
-Use for: Displaying current section in headers. Automatically enabled in `homework` template.
+Use for: Displaying current section in headers. Used by the `homework` template.
 
 === Booktabs (v0.0.4)
 
+*Included in `style` - automatically available.*
+
 Publication-quality table styling.
 
-Automatically applied to all tables. Creates professional spacing and rules.
+When using `style`, automatically applied to all tables. Creates professional spacing and rules.
 
-Use for: All tables. No manual configuration needed.
+Use for: All tables. No manual configuration needed when using `style`.
 
 == Compatibility
 
+*Note: Compatibility packages are not included in `style`. Import them explicitly if needed.*
+
 === MiTeX (v0.2.5)
+
+*Not included in `style` - import explicitly if needed.*
 
 LaTeX compatibility layer for including LaTeX code.
 
@@ -1234,7 +1322,11 @@ Use for: Converting existing LaTeX, complex LaTeX-only constructs.
 
 == Color
 
+*Note: Color packages are not included in `style`. Import them explicitly if needed.*
+
 === Splash (v0.5.0)
+
+*Not included in `style` - import explicitly if needed.*
 
 Extended color support including xcolor names.
 
@@ -1245,6 +1337,8 @@ Extended color support including xcolor names.
 Use for: Advanced color specifications.
 
 === Typpuccino (v0.1.0)
+
+*Not included in `style` - import explicitly if needed.*
 
 Catppuccin color schemes (frappe, latte, macchiato, mocha).
 
@@ -1275,6 +1369,8 @@ Use for: Consistent color theming.
   date: datetime(year: 2025, month: 2, day: 1),
 )
 
+#show: style.with()
+
 = Integration by Parts
 
 #question(status: "done")[
@@ -1304,6 +1400,8 @@ Use for: Consistent color theming.
   author: "Student",
   email: "student@school.edu",
 )
+
+#show: style.with()
 
 = Random Variables
 
@@ -1346,6 +1444,8 @@ Use for: Consistent color theming.
   author: "Your Name",
   date: datetime(year: 2025, month: 3, day: 15),
 )
+
+#show: style.with()
 
 #let gatbox = gatbox.with(color-cycle: true)
 
@@ -1587,19 +1687,21 @@ Based on conventions and optimal usage of this package:
 
 #table(
   columns: 4,
-  [*Feature*], [*common*], [*homework*], [*cheatsheet*],
+  [*Feature*], [*style*], [*homework*], [*cheatsheet*],
   [Columns], [N/A], [1 or 2], [3 (fixed)],
-  [Font size], [11pt], [13pt (1-col) / 10pt (2-col)], [6pt],
+  [Font size], [N/A], [13pt (1-col) / 10pt (2-col)], [6pt],
   [Headers], [None], [Optional], [None],
-  [Margins], [Default], [~1 inch], [0.5cm],
+  [Margins], [N/A], [~1 inch], [0.5cm],
   [Question boxes], [No], [Yes], [No (manual)],
-  [Equation numbers], [Yes], [Yes], [Optional],
+  [Equation numbers], [Yes (when used)], [Yes], [Yes],
 )
 
 == Function Reference
 
+=== Styling
+- `style(enable-shorthands: true, body)`
+
 === Templates
-- `common(enable-shorthands: true, body)`
 - `homework(title, course, university, author, email, ...)`
 - `cheatsheet(title, course, university, author, email, ...)`
 
@@ -1646,10 +1748,10 @@ For detailed package documentation:
 
 *v0.1.0* (Current)
 - Initial release
-- Templates: homework, cheatsheet, common
-- 20+ integrated packages
-- Math utilities and shorthands
-- Custom box system
+- Templates: homework, cheatsheet
+- Optional styling function with math shorthands, code highlighting, and table formatting
+- Math utilities and custom box system
+- Core package integrations (equate, physica, codly, booktabs, fontawesome)
 
 ---
 
