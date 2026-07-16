@@ -1,4 +1,4 @@
-#import "../preamble.typ": *
+#import "./preamble.typ": *
 
 // Diagramming
 #import "@preview/cetz:0.4.2": canvas, draw
